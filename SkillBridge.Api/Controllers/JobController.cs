@@ -19,4 +19,15 @@ public class JobController: ControllerBase
     
         return _jobRepository.GetJobListAsync().Result;
     }
+    [HttpGet("{id}")]
+
+    public async Task<IActionResult> GetJobById(int id)
+    {
+        var job = await _jobRepository.GetJobByIdAsync(id);
+        if (job == null)
+        {
+            return NotFound();
+        }
+        return Ok(job);
+    }
 }
